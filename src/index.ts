@@ -13,11 +13,16 @@ type Env = {
 
 const app = new Hono<Env>()
 
-app.get('/', (c) => {
-   const x = c.env.DB_URL
+app.get('/', async (c) => {
    const supabase = createClient<Database>(c.env.DB_URL, c.env.DB_KEY)
 
-   return c.text('Hello')
+   const result = await supabase.from('blogs').insert([{
+      name: 'Dummy blog new',
+      slug: 'dummy-blog-2'
+   }])
+
+
+   return c.json(result.data)
 })
 
 export default app

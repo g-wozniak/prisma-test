@@ -4,6 +4,7 @@
     "dev": "wrangler dev src/index.ts --port 3000",
     "deploy": "wrangler deploy --minify src/index.ts --env production",
     "db:generate": "npx supabase gen types typescript --project-id kluuqrvdwpyxrkumpstf > src/orm/db.types.ts",
+    "db:pull": "npx supabase pull",
     "db:start": "npx supabase start",
     "db:stop": "npx supabase stop",
     "db:reset": "npx supabase stop --no-backup"
