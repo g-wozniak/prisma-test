@@ -1,0 +1,1 @@
+export {POST as BlogsPost} from './blogs.handler'

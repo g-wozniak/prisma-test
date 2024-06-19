@@ -1,28 +1,20 @@
-import {Context, Hono} from 'hono'
-import helloHandler from './hello.handler'
+import {Hono} from 'hono'
+import { zValidator } from '@hono/zod-validator'
 import {createClient} from '@supabase/supabase-js'
-import {Database} from './orm/db.types'
 
-type Env = {
-   Bindings: {
-      DB_KEY: string
-      DB_URL: string
-   }
-}
+import {Database} from './orm/db.types'
+import {Env} from './types'
+import {BlogsPost} from './handlers'
 
 
 const app = new Hono<Env>()
 
-app.get('/', async (c) => {
-   const supabase = createClient<Database>(c.env.DB_URL, c.env.DB_KEY)
-
-   const result = await supabase.from('blogs').insert([{
-      name: 'Dummy blog new',
-      slug: 'dummy-blog-2'
-   }])
-
-
-   return c.json(result.data)
+app.use(async (c, next) => {
+   c.set('supabase', createClient<Database>(c.env.DB_URL, c.env.DB_KEY))
+   await next()
 })
+
+// Change to post
+app.post('/blogs', zValidator('json', BlogsPost.schema), BlogsPost.handler)
 
 export default app
