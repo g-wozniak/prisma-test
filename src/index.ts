@@ -1,5 +1,5 @@
 import {Hono} from 'hono'
-import { zValidator } from '@hono/zod-validator'
+import {zValidator} from '@hono/zod-validator'
 import {createClient} from '@supabase/supabase-js'
 
 import {Database} from './orm/db.types'
