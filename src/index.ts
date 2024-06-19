@@ -1,6 +1,7 @@
 import {Context, Hono} from 'hono'
 import helloHandler from './hello.handler'
 import {createClient} from '@supabase/supabase-js'
+import {Database} from './orm/db.types'
 
 type Env = {
    Bindings: {
@@ -14,8 +15,8 @@ const app = new Hono<Env>()
 
 app.get('/', (c) => {
    const x = c.env.DB_URL
-   const supabase = createClient(c.env.DB_URL, c.env.DB_KEY)
-   console.log(supabase)
+   const supabase = createClient<Database>(c.env.DB_URL, c.env.DB_KEY)
+
    return c.text('Hello')
 })
 
