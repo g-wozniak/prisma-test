@@ -1,0 +1,19 @@
+{
+  "name": "prisma-test",
+  "scripts": {
+    "dev": "wrangler dev src/index.ts --port 3000",
+    "deploy": "wrangler deploy --minify src/index.ts --env production",
+
+    "db:start": "npx supabase start",
+    "db:stop": "npx supabase stop",
+    "db:reset": "npx supabase stop --no-backup"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.43.5",
+    "hono": "^4.4.7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240529.0",
+    "wrangler": "^3.57.2"
+  }
+}
