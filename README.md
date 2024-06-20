@@ -1,5 +1,8 @@
 npx wrangler login
 
+Locally
+ 
+
 ```
 API URL: http://127.0.0.1:54321
 GraphQL URL: http://127.0.0.1:54321/graphql/v1
