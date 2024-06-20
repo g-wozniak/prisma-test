@@ -1,7 +1,7 @@
 import * as nock from 'nock'
-import app from '../index'
-import {MOCK_ENV} from '../mocks'
-import {Blog} from '../orm/aliases'
+import app from '../../index'
+import {MOCK_ENV} from '../../mocks'
+import {Blog} from '../../orm/aliases'
 
 describe('→ blogs.handler', () => {
 
@@ -57,7 +57,28 @@ describe('→ blogs.handler', () => {
 
       test.todo('→ creates a blog with posts')
 
-      test.skip('→ fails if the database operation failed')
+      test.todo('→ fails if the database operation failed')
 
+   })
+
+   describe('→ GET /blogs/:uniqueRef', () => {
+      test('→ fails if the unique reference is not provided', async () => {
+         const res = await app.request('/blogs', {
+            method: 'GET'
+         }, MOCK_ENV)
+         expect(res.status).toBe(404)
+      })
+
+      test.todo('→ returns an empty object if blog not found')
+
+      test.todo('→ finds a blog by ID')
+
+      test.todo('→ finds a blog by slug')
+
+      test.todo('→ finds a blog by slug with posts')
+
+      test.todo('→ finds a blog by id with posts')
+
+      test.todo('→ fails if the database operation failed')
    })
 })

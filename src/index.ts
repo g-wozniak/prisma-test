@@ -4,7 +4,7 @@ import {createClient} from '@supabase/supabase-js'
 
 import {Database} from './orm/db.types'
 import {Env} from './types'
-import {BlogsPost, PostsPost} from './handlers'
+import {BlogsGet, BlogsPost, PostsPost} from './handlers'
 
 
 const app = new Hono<Env>()
@@ -16,6 +16,9 @@ app.use(async (c, next) => {
 
 // Create a new blog with or without posts
 app.post('/blogs', zValidator('json', BlogsPost.schema), BlogsPost.handler)
+
+// Search for a blog
+app.get('/blogs/:uniqueRef', zValidator('query', BlogsGet.schema), BlogsGet.handler)
 
 // Create a new posts for a blog
 app.post('/posts', zValidator('json', PostsPost.schema), PostsPost.handler)

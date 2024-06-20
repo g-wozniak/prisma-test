@@ -1,7 +1,7 @@
 import {HTTPException} from 'hono/http-exception'
 import {z} from 'zod'
 import {Context} from 'hono'
-import {Env} from '../types'
+import {Env} from '../../types'
 
 export const POST = {
    schema: z.object({

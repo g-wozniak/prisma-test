@@ -1,6 +1,6 @@
-import app from '../index'
-import {MOCK_ENV} from '../mocks'
-import {Post} from '../orm/aliases'
+import app from '../../index'
+import {MOCK_ENV} from '../../mocks'
+import {Post} from '../../orm/aliases'
 
 describe('→ posts.handler', () => {
 
