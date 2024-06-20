@@ -1,50 +1,48 @@
-import * as nock from 'nock'
 import app from '../index'
 import {MOCK_ENV} from '../mocks'
-import {Blog} from '../orm/aliases'
+import {Post} from '../orm/aliases'
 
-describe('→ blogs.handler', () => {
+describe('→ posts.handler', () => {
 
-   describe('→ POST /blogs', () => {
+   describe('→ POST /posts', () => {
 
-      test('→ fails if the blog name is not provided', async () => {
-         const res = await app.request('/blogs', {
+      test('→ fails if the post content is not provided', async () => {
+         const res = await app.request('/posts', {
             method: 'POST',
             body: JSON.stringify({
-               slug: 'dummy-blog-2'
+               title: 'My first post',
+               blogId: 1
             })
          }, MOCK_ENV)
          expect(res.status).toBe(400)
       })
 
-      test('→ fails if the blog slug is not provided', async () => {
+      test('→ fails if the blogId is not provided', async () => {
          const res = await app.request('/blogs', {
             method: 'POST',
             body: JSON.stringify({
-               name: 'My first blog'
+               title: 'My first post',
+               content: 'Hello, world!'
             })
          }, MOCK_ENV)
          expect(res.status).toBe(400)
       })
 
-      test.skip('→ creates a blog without posts', async () => {
-         nock.disableNetConnect()
-         const scope = nock(MOCK_ENV.DB_URL)
-            .post('/rest/*')
-            .reply(200, 'test response')
-
+      test.skip('→ creates a post', async () => {
          const payload = {
-            name: 'My first blog',
-            slug: 'my-first-blog'
+            title: 'My first post in this blog',
+            content: 'Hello, world!',
+            blogId: 1
          }
 
-         const expected: Blog = {
+         const expected: Post = {
             ...payload,
+            viewCount: 0,
             id: 12,
             createdAt: '2021-01-01T00:00:00Z'
          }
 
-         const res = await app.request('/blogs', {
+         const res = await app.request('/posts', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json'
@@ -55,9 +53,8 @@ describe('→ blogs.handler', () => {
          expect(await res.json()).toBe(expected)
       })
 
-      test.todo('→ creates a blog with posts')
+      test.skip('→ fails if the blog referenced by blogId does not exist')
 
       test.skip('→ fails if the database operation failed')
-
    })
 })

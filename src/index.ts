@@ -4,7 +4,7 @@ import {createClient} from '@supabase/supabase-js'
 
 import {Database} from './orm/db.types'
 import {Env} from './types'
-import {BlogsPost} from './handlers'
+import {BlogsPost, PostsPost} from './handlers'
 
 
 const app = new Hono<Env>()
@@ -14,7 +14,10 @@ app.use(async (c, next) => {
    await next()
 })
 
-// Change to post
+// Create a new blog with or without posts
 app.post('/blogs', zValidator('json', BlogsPost.schema), BlogsPost.handler)
+
+// Create a new posts for a blog
+app.post('/posts', zValidator('json', PostsPost.schema), PostsPost.handler)
 
 export default app

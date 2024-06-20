@@ -20,12 +20,10 @@ export const POST = {
       const body = await c.req.json() as z.infer<typeof POST.schema>
 
       // Create a new blog
-      const blogResult = await db.from('blogs').insert([
-         {
-            name: body.name,
-            slug: body.slug
-         }
-      ]).select()
+      const blogResult = await db.from('blogs').insert( {
+         name: body.name,
+         slug: body.slug
+      }).select()
 
       // Check if the blog was created successfully
       if (blogResult.status !== 201 || !blogResult.data || !blogResult.data[0].id) {
