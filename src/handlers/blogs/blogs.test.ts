@@ -62,6 +62,7 @@ describe('→ blogs.handler', () => {
    })
 
    describe('→ GET /blogs/:uniqueRef', () => {
+
       test('→ fails if the unique reference is not provided', async () => {
          const res = await app.request('/blogs', {
             method: 'GET'

@@ -53,8 +53,8 @@ describe('→ posts.handler', () => {
          expect(await res.json()).toBe(expected)
       })
 
-      test.skip('→ fails if the blog referenced by blogId does not exist')
+      test.todo('→ fails if the blog referenced by blogId does not exist')
 
-      test.skip('→ fails if the database operation failed')
+      test.todo('→ fails if the database operation failed')
    })
 })
