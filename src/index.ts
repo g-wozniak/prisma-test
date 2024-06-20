@@ -6,7 +6,6 @@ import {Database} from './orm/db.types'
 import {Env} from './types'
 import {BlogsGet, BlogsPost, PostsPost} from './handlers'
 
-
 const app = new Hono<Env>()
 
 app.use(async (c, next) => {
