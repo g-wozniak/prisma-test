@@ -6,22 +6,3 @@ vars = { DB_URL = "http://127.0.0.1:54321", DB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cC
 # Production environment configuration
 [env.production]
 workers_dev = true
-
-# [vars]
-# MY_VAR = "my-variable"
-
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
-# [[r2_buckets]]
-# binding = "MY_BUCKET"
-# bucket_name = "my-bucket"
-
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "my-database"
-# database_id = ""
-
-# [ai]
-# binding = "AI"
